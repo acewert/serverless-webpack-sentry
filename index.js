@@ -2,7 +2,7 @@
 
 /**
  * TODO:
- *     - Figure out why sentry-webpack outputs to two directories
+ *     - Automatically disable and then respect custom:webpack:keepOutputDirectory setting
  *     - Self-documentation
  *     - Fail if uncommited changes present
  *     - Tests
