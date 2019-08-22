@@ -1,0 +1,20 @@
+{
+    "name": "serverless-webpack-sentry",
+    "version": "0.0.1",
+    "description": "Serverless plugin to manage your Sentry releases",
+    "main": "index.js",
+    "author": "Andrew Ewert <acewert@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/acewert/serverless-webpack-sentry"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@sentry/cli": "1.47.1",
+        "bluebird": "^3.5.4",
+        "lodash": "^4.17.11"
+    },
+    "peerDependencies": {
+        "serverless-webpack": "^5.3.1"
+    }
+}
