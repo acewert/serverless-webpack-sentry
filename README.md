@@ -29,6 +29,19 @@ custom:
     keepOutputDirectory: true
 ```
 
+In the root directory of your serverless service, create a `.sentryclirc` file:
+
+```ini
+; .sentryclirc
+
+[defaults]
+org=<your organization name>
+project=<your project name>
+
+[auth]
+token=<your auth token>
+```
+
 ## Configure
 
 The configuration of the plugin is done by defining a `custom:sentry` object in your `serverless.yml` file with your specific configuration. All settings are optional and will be set to reasonable defaults if missing.

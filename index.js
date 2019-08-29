@@ -2,6 +2,7 @@
 
 /**
  * TODO:
+ *     - Add process environment variables for serverless-offline as well
  *     - Automatically disable and then respect custom:webpack:keepOutputDirectory setting
  *     - Self-documentation
  *     - Fail if uncommited changes present
@@ -19,6 +20,7 @@ const _ = require('lodash');
 const ServerlessWebpack = require('serverless-webpack');
 
 const createRelease = require('./lib/createRelease');
+const finalizeRelease = require('./lib/finalizeRelease');
 const setRelease = require('./lib/setRelease');
 const uploadSourceMaps = require('./lib/uploadSourceMaps');
 
@@ -38,6 +40,7 @@ class ServerlessWebpackSentry {
         _.assign(
             this,
             createRelease,
+            finalizeRelease,
             setRelease,
             uploadSourceMaps,
         );
@@ -54,6 +57,7 @@ class ServerlessWebpackSentry {
                         lifecycleEvents: [
                             'createRelease',
                             'uploadSourceMaps',
+                            'finalizeRelease',
                         ],
                     },
                 },
@@ -75,18 +79,14 @@ class ServerlessWebpackSentry {
             'sentry:setRelease:setRelease': this.setRelease.bind(this),
             'sentry:deploy:createRelease': this.createRelease.bind(this),
             'sentry:deploy:uploadSourceMaps': this.uploadSourceMaps.bind(this),
+            'sentry:deploy:finalizeRelease': this.finalizeRelease.bind(this),
         };
     }
 
     getOutputPath() {
         const plugins = this.serverless.pluginManager.getPlugins();
-
-        for (const plugin of plugins) {
-            if (plugin instanceof ServerlessWebpack) {
-                this.compileOutputPaths = plugin.compileOutputPaths;
-                return;
-            }
-        }
+        const slsw = _.find(plugins, plugin => plugin instanceof ServerlessWebpack);
+        this.compileOutputPaths = slsw.compileOutputPaths;
     }
 
     getConfig() {
