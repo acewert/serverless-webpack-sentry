@@ -12,7 +12,7 @@
     "dependencies": {
         "@sentry/cli": "1.47.1",
         "bluebird": "^3.5.4",
-        "lodash": "^4.17.11"
+        "lodash": "^4.17.19"
     },
     "peerDependencies": {
         "serverless-webpack": "^5.3.1"
